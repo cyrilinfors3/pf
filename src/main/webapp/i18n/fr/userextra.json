@@ -1,0 +1,24 @@
+{
+    "pfApp": {
+        "userextra" : {
+            "home": {
+                "title": "Userextras",
+                "createLabel": "Créer un nouveau Userextra",
+                "createOrEditLabel": "Créer ou éditer un Userextra",
+                "search": "Recherche pour Userextra"
+            },
+            "created": "Un nouveau Userextra a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Userextra avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Userextra avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Userextra {{ id }} ?"
+            },
+            "detail": {
+                "title": "Userextra"
+            },
+            "phone": "Phone",
+            "photo": "Photo",
+            "user": "User"
+        }
+    }
+}

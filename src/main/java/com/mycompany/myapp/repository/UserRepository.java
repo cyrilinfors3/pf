@@ -1,14 +1,18 @@
 package com.mycompany.myapp.repository;
 
+import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
+
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.time.Instant;
 
 /**
@@ -26,7 +30,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneByEmailIgnoreCase(String email);
 
     Optional<User> findOneByLogin(String login);
+    
+     User findByLogin(String login);
 
+     User findByAuthorities(Set<Authority> authorities);
     @EntityGraph(attributePaths = "authorities")
     Optional<User> findOneWithAuthoritiesById(Long id);
 

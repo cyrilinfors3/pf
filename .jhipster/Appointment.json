@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "detail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reply",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "caoch",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "pr",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20180124173317",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "appointment",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

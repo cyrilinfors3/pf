@@ -1,0 +1,63 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "vote",
+            "otherEntityName": "vote",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "project"
+        },
+        {
+            "relationshipName": "projectevolution",
+            "otherEntityName": "projectevolution",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "project"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "creationdate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "documentaion",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "owner",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "sponsor",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "coach",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20180108104027",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "project",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

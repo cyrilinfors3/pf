@@ -29,6 +29,12 @@ public class UserDTO {
     private String firstName;
 
     @Size(max = 50)
+    private String phone;
+    
+    @Size(max = 50)
+    private String auth;
+    
+    @Size(max = 50)
     private String lastName;
 
     @Email
@@ -70,12 +76,31 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.phone = "";
+        this.auth= "";
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
     }
 
-    public Long getId() {
+    
+    public String getAuth() {
+		return auth;
+	}
+
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -184,6 +209,8 @@ public class UserDTO {
         return "UserDTO{" +
             "login='" + login + '\'' +
             ", firstName='" + firstName + '\'' +
+            ", phone='" + phone + '\'' +
+            ", auth='" + auth + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +

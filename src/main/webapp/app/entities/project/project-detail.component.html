@@ -1,0 +1,52 @@
+
+<div *ngIf="project">
+    <h2><span jhiTranslate="pfApp.project.detail.title">Project</span> {{project.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pfApp.project.title">Title</span></dt>
+        <dd>
+            <span>{{project.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.project.creationdate">Creationdate</span></dt>
+        <dd>
+            <span>{{project.creationdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.project.documentaion">Documentaion</span></dt>
+        <dd>
+            <div *ngIf="project.documentaion">
+                <a (click)="openFile(project.documentaionContentType, project.documentaion)" jhiTranslate="entity.action.open">open</a>
+                {{project.documentaionContentType}}, {{byteSize(project.documentaion)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="pfApp.project.status">Status</span></dt>
+        <dd>
+            <span>{{project.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.project.owner">Owner</span></dt>
+        <dd>
+            <span>{{project.owner}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.project.sponsor">Sponsor</span></dt>
+        <dd>
+            <span>{{project.sponsor}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.project.coach">Coach</span></dt>
+        <dd>
+            <span>{{project.coach}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

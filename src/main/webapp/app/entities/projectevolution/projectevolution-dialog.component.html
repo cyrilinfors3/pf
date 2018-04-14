@@ -1,0 +1,84 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProjectevolutionLabel" jhiTranslate="pfApp.projectevolution.home.createOrEditLabel">Create or edit a Projectevolution</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!projectevolution.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="projectevolution.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectevolution.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="projectevolution.title" required/>
+            <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectevolution.document" for="field_document">Document</label>
+            <div>
+                <div *ngIf="projectevolution.document" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(projectevolution.documentContentType, projectevolution.document)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{projectevolution.documentContentType}}, {{byteSize(projectevolution.document)}}</span>
+                    <button type="button" (click)="projectevolution.document=null;projectevolution.documentContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_document" (change)="setFileData($event, projectevolution, 'document', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="document" id="field_document"
+                [(ngModel)]="projectevolution.document" required/>
+            <input type="hidden" class="form-control" name="documentContentType" id="field_documentContentType"
+                [(ngModel)]="projectevolution.documentContentType" />
+            <div [hidden]="!(editForm.controls.document?.dirty && editForm.controls.document?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.document?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectevolution.state" for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                [(ngModel)]="projectevolution.state" required/>
+            <div [hidden]="!(editForm.controls.state?.dirty && editForm.controls.state?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.state?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectevolution.project" for="field_project">Project</label>
+            <select class="form-control" id="field_project" name="project" [(ngModel)]="projectevolution.project"  required>
+                <option *ngIf="!editForm.value.project" [ngValue]="null" selected></option>
+                <option [ngValue]="projectOption.id === projectevolution.project?.id ? projectevolution.project : projectOption" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.title}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.project?.dirty && editForm.controls.project?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.project?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

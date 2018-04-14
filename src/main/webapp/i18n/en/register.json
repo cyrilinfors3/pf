@@ -11,6 +11,14 @@
                     "minlength": "Your username is required to be at least 1 character.",
                     "maxlength": "Your username cannot be longer than 50 characters.",
                     "pattern": "Your username can only contain lower-case letters and digits."
+                },
+                 "phone": {
+                    "required": "Your telephone number is required.",
+                    "minlength": "Your telephone number is required."
+                },
+                 "auth": {
+                    "required": "This field is required.",
+                    "minlength": "This field is required."
                 }
             },
             "success": "<strong>Registration saved!</strong> Please check your email for confirmation.",

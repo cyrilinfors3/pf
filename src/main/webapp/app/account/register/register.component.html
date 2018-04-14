@@ -49,6 +49,38 @@
                         </small>
                     </div>
                 </div>
+                 
+                 <div class="form-group">
+                    <label class="form-control-label" for="phone">Phone</label>
+                    <input type="text" class="form-control" [(ngModel)]="registerAccount.phone" id="phone" name="phone" #phone="ngModel" placeholder="phone"
+                            required minlength="2" maxlength="50" pattern="^[_'.@A-Za-z0-9-]*$">
+                    <div *ngIf="phone.dirty && phone.invalid">
+                        <small class="form-text text-danger" *ngIf="phone.errors.required" jhiTranslate="register.messages.validate.phone.required">
+                            Your phone is required.
+                        </small> 
+                        <small class="form-text text-danger" *ngIf="phone.errors.minlength"
+                                jhiTranslate="register.messages.validate.phone.minlength">
+                            Your phone is required.
+                        </small>
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label class="form-control-label" for="auth" >who I am ?</label>
+                    <select class="form-control" [(ngModel)]="registerAccount.auth" required minlength="2" id="auth" name="auth" #auth="ngModel" >
+                      <option value="PROJECTREP">Project representative </option>
+                      <option value="SPONSOR">Project sponsor</option>
+                      
+                    </select>
+                    <div *ngIf="auth.dirty && auth.invalid">
+                        <small class="form-text text-danger" *ngIf="auth.errors.required" jhiTranslate="register.messages.validate.auth.required">
+                             required.
+                        </small> 
+                        <small class="form-text text-danger" *ngIf="auth.errors.minlength"
+                                jhiTranslate="register.messages.validate.auth.minlength">
+                            required.
+                        </small>
+                    </div>
+                </div>  
                 <div class="form-group">
                     <label class="form-control-label" for="email" jhiTranslate="global.form.email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" #email="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
@@ -121,11 +153,11 @@
             </div>
         </div>
         <div class="col-md-4">
-            <br/>
+             <!-- <br/>
             <jhi-social provider="google"></jhi-social>
             <jhi-social provider="facebook"></jhi-social>
             <jhi-social provider="twitter"></jhi-social>
-            <!-- jhipster-needle-add-social-button -->
+           jhipster-needle-add-social-button -->
         </div>
     </div>
 </div>

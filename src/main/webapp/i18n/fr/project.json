@@ -1,0 +1,30 @@
+{
+    "pfApp": {
+        "project" : {
+            "home": {
+                "title": "Projects",
+                "createLabel": "Créer un nouveau Project",
+                "createOrEditLabel": "Créer ou éditer un Project",
+                "search": "Recherche pour Project"
+            },
+            "created": "Un nouveau Project a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Project avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Project avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Project {{ id }} ?"
+            },
+            "detail": {
+                "title": "Project"
+            },
+            "title": "Title",
+            "creationdate": "Creationdate",
+            "documentaion": "Documentaion",
+            "status": "Status",
+            "owner": "Owner",
+            "sponsor": "Sponsor",
+            "coach": "Coach",
+            "vote": "Vote",
+            "projectevolution": "Projectevolution"
+        }
+    }
+}

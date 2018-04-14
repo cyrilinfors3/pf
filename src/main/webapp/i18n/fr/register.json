@@ -11,6 +11,14 @@
                     "minlength": "Votre nom d'utilisateur doit contenir plus d'un caractère.",
                     "maxlength": "Votre nom d'utilisateur ne peut pas contenir plus de 50 caractères.",
                     "pattern": "Votre nom d'utilisateur ne peut contenir que des lettres minuscules ou des nombres."
+                },
+                 "phone": {
+                    "required": "Votre numéro de téléphone est requis.",
+                     "minlength": "Votre numéro de téléphone est requis."
+                },
+                 "auth": {
+                    "required": "Ce champ est requis.",
+                    "minlength": "Ce champ est requis."
                 }
             },
             "success": "<strong>Compte enregistré !</strong> Merci de vérifier votre email de confirmation.",

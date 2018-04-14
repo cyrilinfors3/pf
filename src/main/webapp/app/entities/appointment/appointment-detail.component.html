@@ -1,0 +1,45 @@
+
+<div *ngIf="appointment">
+    <h2><span jhiTranslate="pfApp.appointment.detail.title">Appointment</span> {{appointment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pfApp.appointment.date">Date</span></dt>
+        <dd>
+            <span>{{appointment.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointment.state">State</span></dt>
+        <dd>
+            <span>{{appointment.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointment.detail">Detail</span></dt>
+        <dd>
+            <span>{{appointment.detail}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointment.reply">Reply</span></dt>
+        <dd>
+            <span>{{appointment.reply}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointment.caoch">Caoch</span></dt>
+        <dd>
+            <span>{{appointment.caoch}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointment.pr">Pr</span></dt>
+        <dd>
+            <span>{{appointment.pr}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'appointment/'+ appointment.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

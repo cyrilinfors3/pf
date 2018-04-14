@@ -1,0 +1,38 @@
+
+<div *ngIf="userextra">
+    <h2><span jhiTranslate="pfApp.userextra.detail.title">Userextra</span> {{userextra.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pfApp.userextra.phone">Phone</span></dt>
+        <dd>
+            <span>{{userextra.phone}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.userextra.photo">Photo</span></dt>
+        <dd>
+            <div *ngIf="userextra.photo">
+                <a (click)="openFile(userextra.photoContentType, userextra.photo)">
+                    <img [src]="'data:' + userextra.photoContentType + ';base64,' + userextra.photo" style="max-width: 100%;" alt="userextra image"/>
+                </a>
+                {{userextra.photoContentType}}, {{byteSize(userextra.photo)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="pfApp.userextra.user">User</span></dt>
+        <dd>
+            {{userextra.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'userextra/'+ userextra.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

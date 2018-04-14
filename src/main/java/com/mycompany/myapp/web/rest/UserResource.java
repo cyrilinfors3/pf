@@ -3,8 +3,11 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.config.Constants;
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.domain.Userextra;
 import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.repository.UserextraRepository;
 import com.mycompany.myapp.repository.search.UserSearchRepository;
+import com.mycompany.myapp.repository.search.UserextraSearchRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.service.MailService;
 import com.mycompany.myapp.service.UserService;
@@ -14,6 +17,7 @@ import com.mycompany.myapp.web.rest.errors.EmailAlreadyUsedException;
 import com.mycompany.myapp.web.rest.errors.LoginAlreadyUsedException;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
+
 import io.github.jhipster.web.util.ResponseUtil;
 
 import org.slf4j.Logger;
@@ -26,7 +30,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -72,7 +78,12 @@ public class UserResource {
     private final MailService mailService;
 
     private final UserSearchRepository userSearchRepository;
-
+    
+    @Inject
+     UserextraRepository userextraRepository;
+    @Inject
+     UserextraSearchRepository userextraSearchRepository;
+    
     public UserResource(UserRepository userRepository, UserService userService, MailService mailService, UserSearchRepository userSearchRepository) {
 
         this.userRepository = userRepository;
@@ -107,7 +118,14 @@ public class UserResource {
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
         } else {
+        	
             User newUser = userService.createUser(userDTO);
+            Userextra userextra= new Userextra();
+            userextra.setUser(newUser);
+            userextra.setPhone(userDTO.getPhone());
+            Userextra result = userextraRepository.save(userextra);
+            userextraSearchRepository.save(userextra);
+            userextraRepository.save(userextra);
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))

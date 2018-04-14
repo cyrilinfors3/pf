@@ -1,0 +1,25 @@
+{
+    "pfApp": {
+        "projectevolution" : {
+            "home": {
+                "title": "Projectevolutions",
+                "createLabel": "Create a new Projectevolution",
+                "createOrEditLabel": "Create or edit a Projectevolution",
+                "search": "Search for Projectevolution"
+            },
+            "created": "A new Projectevolution is created with identifier {{ param }}",
+            "updated": "A Projectevolution is updated with identifier {{ param }}",
+            "deleted": "A Projectevolution is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Projectevolution {{ id }}?"
+            },
+            "detail": {
+                "title": "Projectevolution"
+            },
+            "title": "Title",
+            "document": "Document",
+            "state": "State",
+            "project": "Project"
+        }
+    }
+}

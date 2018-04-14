@@ -1,0 +1,31 @@
+
+<div *ngIf="vote">
+    <h2><span jhiTranslate="pfApp.vote.detail.title">Vote</span> {{vote.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pfApp.vote.rang">Rang</span></dt>
+        <dd>
+            <span>{{vote.rang}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.vote.project">Project</span></dt>
+        <dd>
+            <div *ngIf="vote.project">
+                <a [routerLink]="['/project', vote.project?.id]">{{vote.project?.title}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'vote/'+ vote.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

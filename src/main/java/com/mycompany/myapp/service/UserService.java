@@ -2,10 +2,13 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.domain.Userextra;
 import com.mycompany.myapp.repository.AuthorityRepository;
+import com.mycompany.myapp.repository.UserextraRepository;
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.UserSearchRepository;
+import com.mycompany.myapp.repository.search.UserextraSearchRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.util.RandomUtil;
@@ -26,6 +29,8 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import javax.inject.Inject;
 
 /**
  * Service class for managing users.
@@ -49,6 +54,12 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+    
+    @Inject
+    UserextraRepository userextraRepository;
+   @Inject
+    UserextraSearchRepository userextraSearchRepository;
+   
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
@@ -101,7 +112,17 @@ public class UserService {
     public User registerUser(UserDTO userDTO, String password) {
 
         User newUser = new User();
-        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        String role=userDTO.getAuth();
+        Authority authority=null;
+        authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+//        if(role.equals("PROJECTREP")){
+//        	  authority = authorityRepository.findOne(AuthoritiesConstants.PROJECTREP);	
+//        	  
+//        }else if(role.equals("SPONSOR")){
+//        	  authority = authorityRepository.findOne(AuthoritiesConstants.SPONSOR);
+//        } else {
+//        	  authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+//        } 
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin());
@@ -117,9 +138,21 @@ public class UserService {
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
+        authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        authorities.add(authority);
+        //authority = authorityRepository.findOne(AuthoritiesConstants.COACH);
+        authorities.add(authority);
         newUser.setAuthorities(authorities);
+        
         userRepository.save(newUser);
         userSearchRepository.save(newUser);
+        
+        Userextra userextra= new Userextra();
+        userextra.setUser(newUser);
+        userextra.setPhone(userDTO.getPhone());
+        Userextra result = userextraRepository.save(userextra);
+        userextraSearchRepository.save(userextra); 
+        
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }

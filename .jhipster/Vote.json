@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "project",
+            "otherEntityName": "project",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "title"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "rang",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180108105356",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "vote",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

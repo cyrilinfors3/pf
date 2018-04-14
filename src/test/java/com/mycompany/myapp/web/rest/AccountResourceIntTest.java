@@ -13,8 +13,8 @@ import com.mycompany.myapp.web.rest.errors.ExceptionTranslator;
 import com.mycompany.myapp.web.rest.vm.KeyAndPasswordVM;
 import com.mycompany.myapp.web.rest.vm.ManagedUserVM;
 import com.mycompany.myapp.service.UserService;
-import org.apache.commons.lang3.RandomStringUtils;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,9 +30,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.Instant;
 import java.time.LocalDate;
-
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -410,7 +410,16 @@ public class AccountResourceIntTest {
         validUser.setActivated(true);
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
-        validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+        
+        Set<String> authorities = new HashSet<>();
+        Authority authority = new Authority();
+        authority.setName(AuthoritiesConstants.USER);
+      //  authorities.addAll((Collection<? extends String>) authority);
+       // authority.setName(AuthoritiesConstants.COACH);
+        //authorities.addAll((Collection<? extends String>) authority);
+        //validUser.setAuthorities(authorities);
+        //validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.COACH));
+         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
 
         restMvc.perform(
             post("/api/register")

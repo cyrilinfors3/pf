@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Project } from '../entities/project/project.model';
 
 import { Account, LoginModalService, Principal } from '../shared';
 
@@ -15,12 +18,17 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    private apiurl= 'http://localhost:8080/api/projects';
+    data: any= {};
 
-    constructor(
+    constructor( private http: Http,
         private principal: Principal,
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager
     ) {
+
+        this.getProjects();
+        this.getData();
     }
 
     ngOnInit() {
@@ -44,5 +52,15 @@ export class HomeComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+    }
+
+    getData() {
+    return this.http.get(this.apiurl).map((res: Response) => res.json())
+    }
+
+    getProjects() {
+    this.getData().subscribe(data => {
+    this.data = data;
+       })
     }
 }

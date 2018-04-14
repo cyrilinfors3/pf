@@ -6,20 +6,43 @@
         <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
     </head>
     <body>
-        <p th:text="#{email.activation.greeting(${user.login})}">
-            Dear
-        </p>
-        <p th:text="#{email.activation.text1}">
+    
+    <h2 th:text="#{email.activation.title}">pf</h2>
+
+<div class="card"> 
+  <div class="container">
+    <h4 th:text="#{email.activation.greeting(${user.login})}">
+            Dear</h4> 
+    <p th:text="#{email.activation.text1}">
             Your JHipster account has been created, please click on the URL below to activate it:
-        </p>
-        <p>
+        </p> 
+    <p>
             <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}"
                th:text="@{|${baseUrl}/#/activate?key=${user.activationKey}|}">Activation Link</a>
         </p>
         <p>
             <span th:text="#{email.activation.text2}">Regards, </span>
             <br/>
-            <em th:text="#{email.signature}">JHipster.</em>
-        </p>
+            <em th:text="#{email.signature}">JHipster.</em> 
+         </p>      
+  </div>
+</div>
+
+        
     </body>
+    <style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+</style>
 </html>

@@ -1,0 +1,42 @@
+
+<div *ngIf="projectevolution">
+    <h2><span jhiTranslate="pfApp.projectevolution.detail.title">Projectevolution</span> {{projectevolution.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pfApp.projectevolution.title">Title</span></dt>
+        <dd>
+            <span>{{projectevolution.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.projectevolution.document">Document</span></dt>
+        <dd>
+            <div *ngIf="projectevolution.document">
+                <a (click)="openFile(projectevolution.documentContentType, projectevolution.document)" jhiTranslate="entity.action.open">open</a>
+                {{projectevolution.documentContentType}}, {{byteSize(projectevolution.document)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="pfApp.projectevolution.state">State</span></dt>
+        <dd>
+            <span>{{projectevolution.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.projectevolution.project">Project</span></dt>
+        <dd>
+            <div *ngIf="projectevolution.project">
+                <a [routerLink]="['/project', projectevolution.project?.id]">{{projectevolution.project?.title}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'projectevolution/'+ projectevolution.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
