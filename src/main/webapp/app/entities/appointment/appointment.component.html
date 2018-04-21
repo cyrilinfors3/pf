@@ -34,8 +34,9 @@
             <th jhiSortBy="state"><span jhiTranslate="pfApp.appointment.state">State</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="detail"><span jhiTranslate="pfApp.appointment.detail">Detail</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="reply"><span jhiTranslate="pfApp.appointment.reply">Reply</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="caoch"><span jhiTranslate="pfApp.appointment.caoch">Caoch</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pr"><span jhiTranslate="pfApp.appointment.pr">Pr</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sender"><span jhiTranslate="pfApp.appointment.sender">Sender</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="receiver"><span jhiTranslate="pfApp.appointment.receiver">Receiver</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="project.id"><span jhiTranslate="pfApp.appointment.project">Project</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -46,8 +47,13 @@
                 <td>{{appointment.state}}</td>
                 <td>{{appointment.detail}}</td>
                 <td>{{appointment.reply}}</td>
-                <td>{{appointment.caoch}}</td>
-                <td>{{appointment.pr}}</td>
+                <td>{{appointment.sender}}</td>
+                <td>{{appointment.receiver}}</td>
+                <td>
+                    <div *ngIf="appointment.project">
+                        <a [routerLink]="['../project', appointment.project?.id ]" >{{appointment.project?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

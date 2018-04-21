@@ -43,15 +43,15 @@
         },
         {
             "fieldName": "owner",
-            "fieldType": "Long"
+            "fieldType": "String"
         },
         {
             "fieldName": "sponsor",
-            "fieldType": "Long"
+            "fieldType": "String"
         },
         {
             "fieldName": "coach",
-            "fieldType": "Long"
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180108104027",

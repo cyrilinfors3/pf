@@ -37,11 +37,14 @@ public class Appointment implements Serializable {
     @Column(name = "reply")
     private String reply;
 
-    @Column(name = "caoch")
-    private Long caoch;
+    @Column(name = "sender")
+    private String sender;
 
-    @Column(name = "pr")
-    private Long pr;
+    @Column(name = "receiver")
+    private String receiver;
+
+    @ManyToOne
+    private Project project;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -104,30 +107,43 @@ public class Appointment implements Serializable {
         this.reply = reply;
     }
 
-    public Long getCaoch() {
-        return caoch;
+    public String getSender() {
+        return sender;
     }
 
-    public Appointment caoch(Long caoch) {
-        this.caoch = caoch;
+    public Appointment sender(String sender) {
+        this.sender = sender;
         return this;
     }
 
-    public void setCaoch(Long caoch) {
-        this.caoch = caoch;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public Long getPr() {
-        return pr;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public Appointment pr(Long pr) {
-        this.pr = pr;
+    public Appointment receiver(String receiver) {
+        this.receiver = receiver;
         return this;
     }
 
-    public void setPr(Long pr) {
-        this.pr = pr;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public Appointment project(Project project) {
+        this.project = project;
+        return this;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -159,8 +175,8 @@ public class Appointment implements Serializable {
             ", state='" + getState() + "'" +
             ", detail='" + getDetail() + "'" +
             ", reply='" + getReply() + "'" +
-            ", caoch=" + getCaoch() +
-            ", pr=" + getPr() +
+            ", sender='" + getSender() + "'" +
+            ", receiver='" + getReceiver() + "'" +
             "}";
     }
 }

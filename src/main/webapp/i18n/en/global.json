@@ -12,6 +12,8 @@
                 "projectevolution": "Projectevolution",
                 "vote": "Vote",
                 "appointment": "Appointment",
+                "projectmessages": "Projectmessages",
+                "appointmentmessages": "Appointmentmessages",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

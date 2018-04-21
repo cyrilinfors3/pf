@@ -2,13 +2,17 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Appointment;
-
+import com.mycompany.myapp.domain.Project;
 import com.mycompany.myapp.repository.AppointmentRepository;
+import com.mycompany.myapp.repository.ProjectRepository;
 import com.mycompany.myapp.repository.search.AppointmentSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
+
 import io.github.jhipster.web.util.ResponseUtil;
+
+import org.elasticsearch.common.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,11 +20,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,6 +49,9 @@ public class AppointmentResource {
     private final AppointmentRepository appointmentRepository;
 
     private final AppointmentSearchRepository appointmentSearchRepository;
+    
+    @Inject
+    ProjectRepository projectRepository;
 
     public AppointmentResource(AppointmentRepository appointmentRepository, AppointmentSearchRepository appointmentSearchRepository) {
         this.appointmentRepository = appointmentRepository;
@@ -62,6 +72,13 @@ public class AppointmentResource {
         if (appointment.getId() != null) {
             throw new BadRequestAlertException("A new appointment cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        ZonedDateTime date = null;
+		appointment.setDate(date.now());
+		appointment.setSender(getCurrentUserLogin());
+		Project p=appointment.getProject();
+		 String ch=p.getCoach();
+		
+		appointment.setReceiver(ch);
         Appointment result = appointmentRepository.save(appointment);
         appointmentSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/appointments/" + result.getId()))
@@ -107,6 +124,14 @@ public class AppointmentResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/myappointments/{login}")
+    @Timed
+    public ResponseEntity<List<Appointment>>  allmyAppointments(@PathVariable String login,Pageable pageable) {
+        log.debug("REST request to get a page of Appointments");
+        Page<Appointment> page = appointmentRepository.findBySender(login,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/appointments");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
     /**
      * GET  /appointments/:id : get the "id" appointment.
      *
@@ -152,5 +177,17 @@ public class AppointmentResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/appointments");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    public String getCurrentUserLogin() {
+        org.springframework.security.core.context.SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null)
+            if (authentication.getPrincipal() instanceof UserDetails)
+             login = ((UserDetails) authentication.getPrincipal()).getUsername();
+            else if (authentication.getPrincipal() instanceof String)
+             login = (String) authentication.getPrincipal();
+         
+        return login; 
+        }
 
 }

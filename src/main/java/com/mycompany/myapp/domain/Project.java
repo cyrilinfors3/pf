@@ -49,13 +49,13 @@ public class Project implements Serializable {
     private String status;
 
     @Column(name = "owner")
-    private Long owner;
+    private String owner;
 
     @Column(name = "sponsor")
-    private Long sponsor;
+    private String sponsor;
 
     @Column(name = "coach")
-    private Long coach;
+    private String coach;
 
     @OneToMany(mappedBy = "project")
     @JsonIgnore
@@ -141,42 +141,42 @@ public class Project implements Serializable {
         this.status = status;
     }
 
-    public Long getOwner() {
+    public String getOwner() {
         return owner;
     }
 
-    public Project owner(Long owner) {
+    public Project owner(String owner) {
         this.owner = owner;
         return this;
     }
 
-    public void setOwner(Long owner) {
+    public void setOwner(String owner) {
         this.owner = owner;
     }
 
-    public Long getSponsor() {
+    public String getSponsor() {
         return sponsor;
     }
 
-    public Project sponsor(Long sponsor) {
+    public Project sponsor(String sponsor) {
         this.sponsor = sponsor;
         return this;
     }
 
-    public void setSponsor(Long sponsor) {
+    public void setSponsor(String sponsor) {
         this.sponsor = sponsor;
     }
 
-    public Long getCoach() {
+    public String getCoach() {
         return coach;
     }
 
-    public Project coach(Long coach) {
+    public Project coach(String coach) {
         this.coach = coach;
         return this;
     }
 
-    public void setCoach(Long coach) {
+    public void setCoach(String coach) {
         this.coach = coach;
     }
 
@@ -260,9 +260,9 @@ public class Project implements Serializable {
             ", documentaion='" + getDocumentaion() + "'" +
             ", documentaionContentType='" + getDocumentaionContentType() + "'" +
             ", status='" + getStatus() + "'" +
-            ", owner=" + getOwner() +
-            ", sponsor=" + getSponsor() +
-            ", coach=" + getCoach() +
+            ", owner='" + getOwner() + "'" +
+            ", sponsor='" + getSponsor() + "'" +
+            ", coach='" + getCoach() + "'" +
             "}";
     }
 }

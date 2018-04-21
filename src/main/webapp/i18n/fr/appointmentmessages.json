@@ -1,0 +1,29 @@
+{
+    "pfApp": {
+        "appointmentmessages" : {
+            "home": {
+                "title": "Appointmentmessages",
+                "createLabel": "Créer un nouveau Appointmentmessages",
+                "createOrEditLabel": "Créer ou éditer un Appointmentmessages",
+                "search": "Recherche pour Appointmentmessages"
+            },
+            "created": "Un nouveau Appointmentmessages a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Appointmentmessages avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Appointmentmessages avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Appointmentmessages {{ id }} ?"
+            },
+            "detail": {
+                "title": "Appointmentmessages"
+            },
+            "project": "Project",
+            "date": "Date",
+            "state": "State",
+            "message": "Message",
+            "reply": "Reply",
+            "createdate": "Createdate",
+            "coach": "Coach",
+            "owner": "Owner"
+        }
+    }
+}

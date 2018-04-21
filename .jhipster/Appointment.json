@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "project",
+            "otherEntityName": "project",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "date",
@@ -19,12 +26,12 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "caoch",
-            "fieldType": "Long"
+            "fieldName": "sender",
+            "fieldType": "String"
         },
         {
-            "fieldName": "pr",
-            "fieldType": "Long"
+            "fieldName": "receiver",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180124173317",

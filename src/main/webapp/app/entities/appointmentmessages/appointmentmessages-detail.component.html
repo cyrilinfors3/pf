@@ -1,0 +1,53 @@
+
+<div *ngIf="appointmentmessages">
+    <h2><span jhiTranslate="pfApp.appointmentmessages.detail.title">Appointmentmessages</span> {{appointmentmessages.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pfApp.appointmentmessages.project">Project</span></dt>
+        <dd>
+            <span>{{appointmentmessages.project}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointmentmessages.date">Date</span></dt>
+        <dd>
+            <span>{{appointmentmessages.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointmentmessages.state">State</span></dt>
+        <dd>
+            <span>{{appointmentmessages.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointmentmessages.message">Message</span></dt>
+        <dd>
+            <span>{{appointmentmessages.message}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointmentmessages.reply">Reply</span></dt>
+        <dd>
+            <span>{{appointmentmessages.reply}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointmentmessages.createdate">Createdate</span></dt>
+        <dd>
+            <span>{{appointmentmessages.createdate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointmentmessages.coach">Coach</span></dt>
+        <dd>
+            <span>{{appointmentmessages.coach}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointmentmessages.owner">Owner</span></dt>
+        <dd>
+            <span>{{appointmentmessages.owner}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'appointmentmessages/'+ appointmentmessages.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

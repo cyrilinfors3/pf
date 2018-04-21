@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "project",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "message",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reply",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "coach",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "owner",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180414131019",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "appointmentmessages",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

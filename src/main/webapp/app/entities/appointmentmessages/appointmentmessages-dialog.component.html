@@ -1,0 +1,69 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAppointmentmessagesLabel" jhiTranslate="pfApp.appointmentmessages.home.createOrEditLabel">Create or edit a Appointmentmessages</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!appointmentmessages.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="appointmentmessages.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointmentmessages.project" for="field_project">Project</label>
+            <input type="number" class="form-control" name="project" id="field_project"
+                [(ngModel)]="appointmentmessages.project" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointmentmessages.date" for="field_date">Date</label>
+            <div class="d-flex">
+                <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="appointmentmessages.date"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointmentmessages.state" for="field_state">State</label>
+            <input type="number" class="form-control" name="state" id="field_state"
+                [(ngModel)]="appointmentmessages.state" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointmentmessages.message" for="field_message">Message</label>
+            <input type="text" class="form-control" name="message" id="field_message"
+                [(ngModel)]="appointmentmessages.message" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointmentmessages.reply" for="field_reply">Reply</label>
+            <input type="text" class="form-control" name="reply" id="field_reply"
+                [(ngModel)]="appointmentmessages.reply" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointmentmessages.createdate" for="field_createdate">Createdate</label>
+            <div class="d-flex">
+                <input id="field_createdate" type="datetime-local" class="form-control" name="createdate" [(ngModel)]="appointmentmessages.createdate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointmentmessages.coach" for="field_coach">Coach</label>
+            <input type="text" class="form-control" name="coach" id="field_coach"
+                [(ngModel)]="appointmentmessages.coach" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointmentmessages.owner" for="field_owner">Owner</label>
+            <input type="text" class="form-control" name="owner" id="field_owner"
+                [(ngModel)]="appointmentmessages.owner" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

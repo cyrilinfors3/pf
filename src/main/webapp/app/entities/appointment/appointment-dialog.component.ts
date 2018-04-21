@@ -9,6 +9,8 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Appointment } from './appointment.model';
 import { AppointmentPopupService } from './appointment-popup.service';
 import { AppointmentService } from './appointment.service';
+import { Project, ProjectService } from '../project';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-appointment-dialog',
@@ -19,16 +21,21 @@ export class AppointmentDialogComponent implements OnInit {
     appointment: Appointment;
     isSaving: boolean;
 
+    projects: Project[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private appointmentService: AppointmentService,
+        private projectService: ProjectService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.projectService.query()
+            .subscribe((res: ResponseWrapper) => { this.projects = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -63,6 +70,10 @@ export class AppointmentDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackProjectById(index: number, item: Project) {
+        return item.id;
     }
 }
 

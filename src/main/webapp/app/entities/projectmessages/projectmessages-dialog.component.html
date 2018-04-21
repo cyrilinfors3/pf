@@ -1,0 +1,70 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProjectmessagesLabel" jhiTranslate="pfApp.projectmessages.home.createOrEditLabel">Create or edit a Projectmessages</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!projectmessages.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="projectmessages.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectmessages.project" for="field_project">Project</label>
+            <input type="number" class="form-control" name="project" id="field_project"
+                [(ngModel)]="projectmessages.project" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectmessages.date" for="field_date">Date</label>
+            <div class="d-flex">
+                <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="projectmessages.date"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectmessages.message" for="field_message">Message</label>
+            <input type="text" class="form-control" name="message" id="field_message"
+                [(ngModel)]="projectmessages.message" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectmessages.file" for="field_file">File</label>
+            <div>
+                <div *ngIf="projectmessages.file" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(projectmessages.fileContentType, projectmessages.file)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{projectmessages.fileContentType}}, {{byteSize(projectmessages.file)}}</span>
+                    <button type="button" (click)="projectmessages.file=null;projectmessages.fileContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_file" (change)="setFileData($event, projectmessages, 'file', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="file" id="field_file"
+                [(ngModel)]="projectmessages.file" />
+            <input type="hidden" class="form-control" name="fileContentType" id="field_fileContentType"
+                [(ngModel)]="projectmessages.fileContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectmessages.sender" for="field_sender">Sender</label>
+            <input type="text" class="form-control" name="sender" id="field_sender"
+                [(ngModel)]="projectmessages.sender" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.projectmessages.receiver" for="field_receiver">Receiver</label>
+            <input type="text" class="form-control" name="receiver" id="field_receiver"
+                [(ngModel)]="projectmessages.receiver" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

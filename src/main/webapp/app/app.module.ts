@@ -7,6 +7,10 @@ import { Ng2Webstorage } from 'ng2-webstorage';
 import { PfSharedModule, UserRouteAccessService } from './shared';
 import { PfAppRoutingModule} from './app-routing.module';
 import { PfHomeModule } from './home/home.module';
+import { PfBlogModule } from './blog/blog.module';
+import { PfMyprojectsModule } from './myprojects/myprojects.module';
+import { PfAppointmentsModule } from './appointments/appointments.module';
+import { PfServicesModule } from './services/services.module';
 import { PfAdminModule } from './admin/admin.module';
 import { PfAccountModule } from './account/account.module';
 import { PfEntityModule } from './entities/entity.module';
@@ -32,6 +36,10 @@ import {
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         PfSharedModule,
         PfHomeModule,
+        PfMyprojectsModule,
+        PfServicesModule,
+        PfAppointmentsModule,
+        PfBlogModule,
         PfAdminModule,
         PfAccountModule,
         PfEntityModule,

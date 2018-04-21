@@ -18,8 +18,9 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-    private apiurl= 'http://localhost:8080/api/projects';
-    data: any= {};
+    l = '';
+    private apiurl = 'http://localhost:8080/api/myprojectsapi/';
+    data: any = {};
 
     constructor( private http: Http,
         private principal: Principal,
@@ -34,6 +35,8 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.account = account;
+            this.l = account.login;
+            this.getProjects();
         });
         this.registerAuthenticationSuccess();
     }
@@ -52,14 +55,14 @@ export class HomeComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+        this.getProjects();
     }
-
     getData() {
-    return this.http.get(this.apiurl).map((res: Response) => res.json())
+    return this.http.get(this.apiurl + this.l ).map((res: Response) => res.json())
     }
 
     getProjects() {
-    this.getData().subscribe(data => {
+    this.getData().subscribe((data) => {
     this.data = data;
        })
     }

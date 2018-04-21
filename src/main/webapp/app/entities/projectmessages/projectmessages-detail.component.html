@@ -1,0 +1,48 @@
+
+<div *ngIf="projectmessages">
+    <h2><span jhiTranslate="pfApp.projectmessages.detail.title">Projectmessages</span> {{projectmessages.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pfApp.projectmessages.project">Project</span></dt>
+        <dd>
+            <span>{{projectmessages.project}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.projectmessages.date">Date</span></dt>
+        <dd>
+            <span>{{projectmessages.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.projectmessages.message">Message</span></dt>
+        <dd>
+            <span>{{projectmessages.message}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.projectmessages.file">File</span></dt>
+        <dd>
+            <div *ngIf="projectmessages.file">
+                <a (click)="openFile(projectmessages.fileContentType, projectmessages.file)" jhiTranslate="entity.action.open">open</a>
+                {{projectmessages.fileContentType}}, {{byteSize(projectmessages.file)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="pfApp.projectmessages.sender">Sender</span></dt>
+        <dd>
+            <span>{{projectmessages.sender}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.projectmessages.receiver">Receiver</span></dt>
+        <dd>
+            <span>{{projectmessages.receiver}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'projectmessages/'+ projectmessages.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

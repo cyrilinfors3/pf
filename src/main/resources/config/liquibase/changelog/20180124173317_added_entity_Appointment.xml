@@ -38,11 +38,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="caoch" type="bigint">
+            <column name="sender" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="pr" type="bigint">
+            <column name="receiver" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="project_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

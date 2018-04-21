@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "project",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "message",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "file",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "sender",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "receiver",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180414130158",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "projectmessages",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -8,9 +8,9 @@ export class Project implements BaseEntity {
         public documentaionContentType?: string,
         public documentaion?: any,
         public status?: string,
-        public owner?: number,
-        public sponsor?: number,
-        public coach?: number,
+        public owner?: string,
+        public sponsor?: string,
+        public coach?: string,
         public votes?: BaseEntity[],
         public projectevolutions?: BaseEntity[],
     ) {

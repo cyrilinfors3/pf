@@ -7,8 +7,9 @@ export class Appointment implements BaseEntity {
         public state?: string,
         public detail?: string,
         public reply?: string,
-        public caoch?: number,
-        public pr?: number,
+        public sender?: string,
+        public receiver?: string,
+        public project?: BaseEntity,
     ) {
     }
 }

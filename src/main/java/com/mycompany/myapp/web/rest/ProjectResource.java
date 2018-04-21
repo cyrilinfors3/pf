@@ -2,26 +2,35 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Project;
-
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.ProjectRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.repository.search.ProjectSearchRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
+
 import io.github.jhipster.web.util.ResponseUtil;
+
+import org.elasticsearch.common.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +50,10 @@ public class ProjectResource {
     private static final String ENTITY_NAME = "project";
 
     private final ProjectRepository projectRepository;
-
+   
+    @Inject
+    UserRepository userRepository;
+    
     private final ProjectSearchRepository projectSearchRepository;
 
     public ProjectResource(ProjectRepository projectRepository, ProjectSearchRepository projectSearchRepository) {
@@ -63,6 +75,12 @@ public class ProjectResource {
         if (project.getId() != null) {
             throw new BadRequestAlertException("A new project cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        if(project.getOwner()==null){
+        	project.setOwner(getCurrentUserLogin());
+        	project.setStatus("0");
+        }
+          
+         
         Project result = projectRepository.save(project);
         projectSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
@@ -106,6 +124,20 @@ public class ProjectResource {
         Page<Project> page = projectRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/projects");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    @GetMapping("/myprojectsapi/{login}")
+    @Timed
+    public List<Project> getAllmyProjects(@PathVariable String login,Pageable pageable) {
+        log.debug("REST request to get a page of Projects");
+        String l= getCurrentUserLogin();
+        List<Project> p = projectRepository.findAll();
+        Page<Project> page = projectRepository.findAll(pageable);
+        List<Project> pp = p;
+        //User u =(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+      //  Long  i =u.getId();
+          pp.removeAll(projectRepository.findAllByOwner(l));
+         return projectRepository.findByOwner(login);
     }
 
     /**
@@ -153,5 +185,18 @@ public class ProjectResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/projects");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    public String getCurrentUserLogin() {
+        org.springframework.security.core.context.SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null)
+            if (authentication.getPrincipal() instanceof UserDetails)
+             login = ((UserDetails) authentication.getPrincipal()).getUsername();
+            else if (authentication.getPrincipal() instanceof String)
+             login = (String) authentication.getPrincipal();
+         
+        return login; 
+        }
 
 }

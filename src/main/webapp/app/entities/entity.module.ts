@@ -5,6 +5,8 @@ import { PfProjectModule } from './project/project.module';
 import { PfProjectevolutionModule } from './projectevolution/projectevolution.module';
 import { PfVoteModule } from './vote/vote.module';
 import { PfAppointmentModule } from './appointment/appointment.module';
+import { PfProjectmessagesModule } from './projectmessages/projectmessages.module';
+import { PfAppointmentmessagesModule } from './appointmentmessages/appointmentmessages.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -14,6 +16,8 @@ import { PfAppointmentModule } from './appointment/appointment.module';
         PfProjectevolutionModule,
         PfVoteModule,
         PfAppointmentModule,
+        PfProjectmessagesModule,
+        PfAppointmentmessagesModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     exports: [

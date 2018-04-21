@@ -20,13 +20,19 @@
         <dd>
             <span>{{appointment.reply}}</span>
         </dd>
-        <dt><span jhiTranslate="pfApp.appointment.caoch">Caoch</span></dt>
+        <dt><span jhiTranslate="pfApp.appointment.sender">Sender</span></dt>
         <dd>
-            <span>{{appointment.caoch}}</span>
+            <span>{{appointment.sender}}</span>
         </dd>
-        <dt><span jhiTranslate="pfApp.appointment.pr">Pr</span></dt>
+        <dt><span jhiTranslate="pfApp.appointment.receiver">Receiver</span></dt>
         <dd>
-            <span>{{appointment.pr}}</span>
+            <span>{{appointment.receiver}}</span>
+        </dd>
+        <dt><span jhiTranslate="pfApp.appointment.project">Project</span></dt>
+        <dd>
+            <div *ngIf="appointment.project">
+                <a [routerLink]="['/project', appointment.project?.id]">{{appointment.project?.id}}</a>
+            </div>
         </dd>
     </dl>
 

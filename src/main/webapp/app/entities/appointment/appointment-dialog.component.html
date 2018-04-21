@@ -35,16 +35,23 @@
                 [(ngModel)]="appointment.reply" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="pfApp.appointment.caoch" for="field_caoch">Caoch</label>
-            <input type="number" class="form-control" name="caoch" id="field_caoch"
-                [(ngModel)]="appointment.caoch" />
+            <label class="form-control-label" jhiTranslate="pfApp.appointment.sender" for="field_sender">Sender</label>
+            <input type="text" class="form-control" name="sender" id="field_sender"
+                [(ngModel)]="appointment.sender" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="pfApp.appointment.pr" for="field_pr">Pr</label>
-            <input type="number" class="form-control" name="pr" id="field_pr"
-                [(ngModel)]="appointment.pr" />
+            <label class="form-control-label" jhiTranslate="pfApp.appointment.receiver" for="field_receiver">Receiver</label>
+            <input type="text" class="form-control" name="receiver" id="field_receiver"
+                [(ngModel)]="appointment.receiver" />
         </div>
 
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pfApp.appointment.project" for="field_project">Project</label>
+            <select class="form-control" id="field_project" name="project" [(ngModel)]="appointment.project" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="projectOption.id === appointment.project?.id ? appointment.project : projectOption" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.id}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

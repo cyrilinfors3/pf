@@ -1,0 +1,27 @@
+{
+    "pfApp": {
+        "projectmessages" : {
+            "home": {
+                "title": "Projectmessages",
+                "createLabel": "Create a new Projectmessages",
+                "createOrEditLabel": "Create or edit a Projectmessages",
+                "search": "Search for Projectmessages"
+            },
+            "created": "A new Projectmessages is created with identifier {{ param }}",
+            "updated": "A Projectmessages is updated with identifier {{ param }}",
+            "deleted": "A Projectmessages is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Projectmessages {{ id }}?"
+            },
+            "detail": {
+                "title": "Projectmessages"
+            },
+            "project": "Project",
+            "date": "Date",
+            "message": "Message",
+            "file": "File",
+            "sender": "Sender",
+            "receiver": "Receiver"
+        }
+    }
+}

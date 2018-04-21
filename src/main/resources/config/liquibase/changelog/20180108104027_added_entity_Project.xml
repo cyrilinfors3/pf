@@ -41,15 +41,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="owner" type="bigint">
+            <column name="owner" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="sponsor" type="bigint">
+            <column name="sponsor" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="coach" type="bigint">
+            <column name="coach" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

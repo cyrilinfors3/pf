@@ -56,14 +56,14 @@ public class ProjectResourceIntTest {
     private static final String DEFAULT_STATUS = "AAAAAAAAAA";
     private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_OWNER = 1L;
-    private static final Long UPDATED_OWNER = 2L;
+    private static final String DEFAULT_OWNER = "AAAAAAAAAA";
+    private static final String UPDATED_OWNER = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_SPONSOR = 1L;
-    private static final Long UPDATED_SPONSOR = 2L;
+    private static final String DEFAULT_SPONSOR = "AAAAAAAAAA";
+    private static final String UPDATED_SPONSOR = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_COACH = 1L;
-    private static final Long UPDATED_COACH = 2L;
+    private static final String DEFAULT_COACH = "AAAAAAAAAA";
+    private static final String UPDATED_COACH = "BBBBBBBBBB";
 
     @Autowired
     private ProjectRepository projectRepository;
@@ -241,9 +241,9 @@ public class ProjectResourceIntTest {
             .andExpect(jsonPath("$.[*].documentaionContentType").value(hasItem(DEFAULT_DOCUMENTAION_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].documentaion").value(hasItem(Base64Utils.encodeToString(DEFAULT_DOCUMENTAION))))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.intValue())))
-            .andExpect(jsonPath("$.[*].sponsor").value(hasItem(DEFAULT_SPONSOR.intValue())))
-            .andExpect(jsonPath("$.[*].coach").value(hasItem(DEFAULT_COACH.intValue())));
+            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.toString())))
+            .andExpect(jsonPath("$.[*].sponsor").value(hasItem(DEFAULT_SPONSOR.toString())))
+            .andExpect(jsonPath("$.[*].coach").value(hasItem(DEFAULT_COACH.toString())));
     }
 
     @Test
@@ -262,9 +262,9 @@ public class ProjectResourceIntTest {
             .andExpect(jsonPath("$.documentaionContentType").value(DEFAULT_DOCUMENTAION_CONTENT_TYPE))
             .andExpect(jsonPath("$.documentaion").value(Base64Utils.encodeToString(DEFAULT_DOCUMENTAION)))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER.intValue()))
-            .andExpect(jsonPath("$.sponsor").value(DEFAULT_SPONSOR.intValue()))
-            .andExpect(jsonPath("$.coach").value(DEFAULT_COACH.intValue()));
+            .andExpect(jsonPath("$.owner").value(DEFAULT_OWNER.toString()))
+            .andExpect(jsonPath("$.sponsor").value(DEFAULT_SPONSOR.toString()))
+            .andExpect(jsonPath("$.coach").value(DEFAULT_COACH.toString()));
     }
 
     @Test
@@ -377,9 +377,9 @@ public class ProjectResourceIntTest {
             .andExpect(jsonPath("$.[*].documentaionContentType").value(hasItem(DEFAULT_DOCUMENTAION_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].documentaion").value(hasItem(Base64Utils.encodeToString(DEFAULT_DOCUMENTAION))))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.intValue())))
-            .andExpect(jsonPath("$.[*].sponsor").value(hasItem(DEFAULT_SPONSOR.intValue())))
-            .andExpect(jsonPath("$.[*].coach").value(hasItem(DEFAULT_COACH.intValue())));
+            .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.toString())))
+            .andExpect(jsonPath("$.[*].sponsor").value(hasItem(DEFAULT_SPONSOR.toString())))
+            .andExpect(jsonPath("$.[*].coach").value(hasItem(DEFAULT_COACH.toString())));
     }
 
     @Test

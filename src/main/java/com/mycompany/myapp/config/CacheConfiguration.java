@@ -49,6 +49,8 @@ public class CacheConfiguration {
             cm.createCache(com.mycompany.myapp.domain.Projectevolution.class.getName(), jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.Vote.class.getName(), jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.Appointment.class.getName(), jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.Projectmessages.class.getName(), jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.Appointmentmessages.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

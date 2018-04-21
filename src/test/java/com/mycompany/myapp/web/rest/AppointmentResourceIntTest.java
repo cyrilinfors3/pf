@@ -56,11 +56,11 @@ public class AppointmentResourceIntTest {
     private static final String DEFAULT_REPLY = "AAAAAAAAAA";
     private static final String UPDATED_REPLY = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_CAOCH = 1L;
-    private static final Long UPDATED_CAOCH = 2L;
+    private static final String DEFAULT_SENDER = "AAAAAAAAAA";
+    private static final String UPDATED_SENDER = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_PR = 1L;
-    private static final Long UPDATED_PR = 2L;
+    private static final String DEFAULT_RECEIVER = "AAAAAAAAAA";
+    private static final String UPDATED_RECEIVER = "BBBBBBBBBB";
 
     @Autowired
     private AppointmentRepository appointmentRepository;
@@ -107,8 +107,8 @@ public class AppointmentResourceIntTest {
             .state(DEFAULT_STATE)
             .detail(DEFAULT_DETAIL)
             .reply(DEFAULT_REPLY)
-            .caoch(DEFAULT_CAOCH)
-            .pr(DEFAULT_PR);
+            .sender(DEFAULT_SENDER)
+            .receiver(DEFAULT_RECEIVER);
         return appointment;
     }
 
@@ -137,8 +137,8 @@ public class AppointmentResourceIntTest {
         assertThat(testAppointment.getState()).isEqualTo(DEFAULT_STATE);
         assertThat(testAppointment.getDetail()).isEqualTo(DEFAULT_DETAIL);
         assertThat(testAppointment.getReply()).isEqualTo(DEFAULT_REPLY);
-        assertThat(testAppointment.getCaoch()).isEqualTo(DEFAULT_CAOCH);
-        assertThat(testAppointment.getPr()).isEqualTo(DEFAULT_PR);
+        assertThat(testAppointment.getSender()).isEqualTo(DEFAULT_SENDER);
+        assertThat(testAppointment.getReceiver()).isEqualTo(DEFAULT_RECEIVER);
 
         // Validate the Appointment in Elasticsearch
         Appointment appointmentEs = appointmentSearchRepository.findOne(testAppointment.getId());
@@ -179,8 +179,8 @@ public class AppointmentResourceIntTest {
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].detail").value(hasItem(DEFAULT_DETAIL.toString())))
             .andExpect(jsonPath("$.[*].reply").value(hasItem(DEFAULT_REPLY.toString())))
-            .andExpect(jsonPath("$.[*].caoch").value(hasItem(DEFAULT_CAOCH.intValue())))
-            .andExpect(jsonPath("$.[*].pr").value(hasItem(DEFAULT_PR.intValue())));
+            .andExpect(jsonPath("$.[*].sender").value(hasItem(DEFAULT_SENDER.toString())))
+            .andExpect(jsonPath("$.[*].receiver").value(hasItem(DEFAULT_RECEIVER.toString())));
     }
 
     @Test
@@ -198,8 +198,8 @@ public class AppointmentResourceIntTest {
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.detail").value(DEFAULT_DETAIL.toString()))
             .andExpect(jsonPath("$.reply").value(DEFAULT_REPLY.toString()))
-            .andExpect(jsonPath("$.caoch").value(DEFAULT_CAOCH.intValue()))
-            .andExpect(jsonPath("$.pr").value(DEFAULT_PR.intValue()));
+            .andExpect(jsonPath("$.sender").value(DEFAULT_SENDER.toString()))
+            .andExpect(jsonPath("$.receiver").value(DEFAULT_RECEIVER.toString()));
     }
 
     @Test
@@ -227,8 +227,8 @@ public class AppointmentResourceIntTest {
             .state(UPDATED_STATE)
             .detail(UPDATED_DETAIL)
             .reply(UPDATED_REPLY)
-            .caoch(UPDATED_CAOCH)
-            .pr(UPDATED_PR);
+            .sender(UPDATED_SENDER)
+            .receiver(UPDATED_RECEIVER);
 
         restAppointmentMockMvc.perform(put("/api/appointments")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -243,8 +243,8 @@ public class AppointmentResourceIntTest {
         assertThat(testAppointment.getState()).isEqualTo(UPDATED_STATE);
         assertThat(testAppointment.getDetail()).isEqualTo(UPDATED_DETAIL);
         assertThat(testAppointment.getReply()).isEqualTo(UPDATED_REPLY);
-        assertThat(testAppointment.getCaoch()).isEqualTo(UPDATED_CAOCH);
-        assertThat(testAppointment.getPr()).isEqualTo(UPDATED_PR);
+        assertThat(testAppointment.getSender()).isEqualTo(UPDATED_SENDER);
+        assertThat(testAppointment.getReceiver()).isEqualTo(UPDATED_RECEIVER);
 
         // Validate the Appointment in Elasticsearch
         Appointment appointmentEs = appointmentSearchRepository.findOne(testAppointment.getId());
@@ -307,8 +307,8 @@ public class AppointmentResourceIntTest {
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].detail").value(hasItem(DEFAULT_DETAIL.toString())))
             .andExpect(jsonPath("$.[*].reply").value(hasItem(DEFAULT_REPLY.toString())))
-            .andExpect(jsonPath("$.[*].caoch").value(hasItem(DEFAULT_CAOCH.intValue())))
-            .andExpect(jsonPath("$.[*].pr").value(hasItem(DEFAULT_PR.intValue())));
+            .andExpect(jsonPath("$.[*].sender").value(hasItem(DEFAULT_SENDER.toString())))
+            .andExpect(jsonPath("$.[*].receiver").value(hasItem(DEFAULT_RECEIVER.toString())));
     }
 
     @Test

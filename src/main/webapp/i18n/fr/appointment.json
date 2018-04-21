@@ -20,8 +20,9 @@
             "state": "State",
             "detail": "Detail",
             "reply": "Reply",
-            "caoch": "Caoch",
-            "pr": "Pr"
+            "sender": "Sender",
+            "receiver": "Receiver",
+            "project": "Project"
         }
     }
 }
