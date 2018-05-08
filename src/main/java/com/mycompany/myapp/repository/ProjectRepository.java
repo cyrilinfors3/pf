@@ -23,6 +23,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 	List<Project> findAllByOwner(String currentUserLogin);
 
 
-	Page<Project> findByOwner(String l, Pageable pageable);
+	Page<Project> findByOwner(String l, Pageable pageable); 
 
 }

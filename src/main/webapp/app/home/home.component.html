@@ -17,8 +17,11 @@
         <p   jhiTranslate="home.subtitle">This is your homepage</p>
         
      -->   
-     
-        <div class="row">
+     <div [ngSwitch]="isAuthenticated()">
+            <div class="alert alert-success" *ngSwitchCase="true">
+                <span *ngIf="account" jhiTranslate="home.logged.message"
+                    translateValues="{username: '{{account.login}}'}"> You are logged in as user "{{account.login}}". </span>
+            <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -28,16 +31,12 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                          <a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-education"></span> <br> Project guid</a>
-                          <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-question-sign"></span> <br/>Help</a>
-                          <a href="#/projects" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-folder-close"></span><br/><br/>Project created</a>
-                          <a href="#/myprojects" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-pencil"></span> <br/>My Projects({{data.length}})</a>
+                          <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-question-sign"></span> <br/>Help</a> 
+                          <a href="#/myprojects" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-pencil"></span> <br/>My Projects </a>
                         </div>
                         <div class="col-xs-6 col-md-6">
-                          <a href="#/settings" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Profile</a>
-                          <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Servidores</a>
-                          <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-picture"></span> <br/>Photos</a>
-                          <a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-off"></span> <br/>Appointment</a>
+                          <a href="#/settings" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Profile</a> 
+                          <a href="#/appointments" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-suitcase"></span>  <br/>Appointments </a>
                         </div>
                     </div>
                     
@@ -45,6 +44,17 @@
             </div>
         </div>
     </div>
+            </div>
+
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <a class="alert-link" (click)="login()" >sign in</a>
+             </div>
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
+                <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+            </div>
+        </div>
+       
       
 </div>
   
@@ -251,8 +261,7 @@
 	
         </div> 
              
-</div> 
- ggg {{l}}
+</div>  
  
 <!-- <div class="row"> 
     <div class="col-md-12">

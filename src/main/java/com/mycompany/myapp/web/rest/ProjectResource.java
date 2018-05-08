@@ -127,17 +127,20 @@ public class ProjectResource {
     }
     @GetMapping("/myprojectsapi/{login}")
     @Timed
-    public List<Project> getAllmyProjects(@PathVariable String login,Pageable pageable) {
+    public ResponseEntity<List<Project>>  getAllmyProjects(@PathVariable String login,Pageable pageable) {
         log.debug("REST request to get a page of Projects");
         String l= getCurrentUserLogin();
         List<Project> p = projectRepository.findAll();
-        Page<Project> page = projectRepository.findAll(pageable);
+        //Page<Project> page = projectRepository.findAll(pageable);
         List<Project> pp = p;
         //User u =(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
       //  Long  i =u.getId();
           pp.removeAll(projectRepository.findAllByOwner(l));
-         return projectRepository.findByOwner(login);
+        // return projectRepository.findByOwner(login);
+          Page<Project> page = projectRepository.findByOwner(login,pageable);
+          HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/myprojectsapi/{login}");
+          return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**

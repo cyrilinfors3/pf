@@ -30,11 +30,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="detail" type="varchar(255)">
+            <column name="detail" type="varchar(1255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="reply" type="varchar(255)">
+            <column name="reply" type="varchar(1255)">
                 <constraints nullable="true" />
             </column>
 

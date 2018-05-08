@@ -9,6 +9,7 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { Project } from './project.model';
 import { ProjectPopupService } from './project-popup.service';
 import { ProjectService } from './project.service';
+import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-project-dialog',
@@ -19,18 +20,25 @@ export class ProjectDialogComponent implements OnInit {
     project: Project;
     isSaving: boolean;
     creationdateDp: any;
+    currentAccount: any;
+    l = '';
 
     constructor(
         public activeModal: NgbActiveModal,
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private projectService: ProjectService,
+        private principal: Principal,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
+            this.l = account.login
+    })
     }
 
     byteSize(field) {

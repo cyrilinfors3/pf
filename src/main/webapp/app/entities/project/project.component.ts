@@ -14,6 +14,7 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 export class ProjectComponent implements OnInit, OnDestroy {
 
 currentAccount: any;
+    l = '';
     projects: Project[];
     error: any;
     success: any;
@@ -113,6 +114,7 @@ currentAccount: any;
         this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            this.l = account.login;
         });
         this.registerChangeInProjects();
     }

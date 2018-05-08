@@ -12,40 +12,40 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="appointment.id" readonly />
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="!appointment.id">
             <label class="form-control-label" jhiTranslate="pfApp.appointment.date" for="field_date">Date</label>
             <div class="d-flex">
                 <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="appointment.date"
-                />
+                readonly />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="!appointment.id">
             <label class="form-control-label" jhiTranslate="pfApp.appointment.state" for="field_state">State</label>
             <input type="text" class="form-control" name="state" id="field_state"
-                [(ngModel)]="appointment.state" />
+                [(ngModel)]="appointment.state" readonly />
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="appointment.id">
             <label class="form-control-label" jhiTranslate="pfApp.appointment.detail" for="field_detail">Detail</label>
-            <input type="text" class="form-control" name="detail" id="field_detail"
-                [(ngModel)]="appointment.detail" />
+            <textarea rows="14" cols="50" class="form-control" name="detail" id="field_detail"
+                [(ngModel)]="appointment.detail"> </textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="!appointment.id">
             <label class="form-control-label" jhiTranslate="pfApp.appointment.reply" for="field_reply">Reply</label>
-            <input type="text" class="form-control" name="reply" id="field_reply"
-                [(ngModel)]="appointment.reply" />
+            <textarea rows="14" cols="50" class="form-control" name="reply" id="field_reply"
+                [(ngModel)]="appointment.reply" > </textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="!appointment.sender">
             <label class="form-control-label" jhiTranslate="pfApp.appointment.sender" for="field_sender">Sender</label>
             <input type="text" class="form-control" name="sender" id="field_sender"
-                [(ngModel)]="appointment.sender" />
+                [(ngModel)]="appointment.sender" readonly />
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="!appointment.id">
             <label class="form-control-label" jhiTranslate="pfApp.appointment.receiver" for="field_receiver">Receiver</label>
             <input type="text" class="form-control" name="receiver" id="field_receiver"
-                [(ngModel)]="appointment.receiver" />
+                [(ngModel)]="appointment.receiver" readonly />
         </div>
 
-        <div class="form-group">
+        <div class="form-group" [hidden]="appointment.id">
             <label class="form-control-label" jhiTranslate="pfApp.appointment.project" for="field_project">Project</label>
             <select class="form-control" id="field_project" name="project" [(ngModel)]="appointment.project" >
                 <option [ngValue]="null"></option>
@@ -53,7 +53,7 @@
             </select>
         </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer">{{l}}
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>

@@ -4,6 +4,7 @@ import { JhiEventManager } from 'ng-jhipster';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Project } from '../entities/project/project.model';
+import { Appointment } from '../entities/appointment/appointment.model';
 
 import { Account, LoginModalService, Principal } from '../shared';
 
@@ -20,7 +21,9 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
     l = '';
     private apiurl = 'http://localhost:8080/api/myprojectsapi/';
+    private apiurlappointment = 'http://localhost:8080/api/myappointments/';
     data: any = {};
+    dataAppointment: any = {};
 
     constructor( private http: Http,
         private principal: Principal,
@@ -30,13 +33,14 @@ export class HomeComponent implements OnInit {
 
         this.getProjects();
         this.getData();
+        this.getProjects();
+        this.getAppointments();
     }
 
     ngOnInit() {
         this.principal.identity().then((account) => {
-            this.account = account;
-            this.l = account.login;
-            this.getProjects();
+        this.account = account;
+        this.l = account.login;
         });
         this.registerAuthenticationSuccess();
     }
@@ -64,6 +68,15 @@ export class HomeComponent implements OnInit {
     getProjects() {
     this.getData().subscribe((data) => {
     this.data = data;
+       })
+    }
+
+    getAppointmentData() {
+    return this.http.get(this.apiurlappointment).map((res: Response) => res.json())
+    }
+    getAppointments() {
+    this.getAppointmentData().subscribe((data) => {
+    this.dataAppointment = data;
        })
     }
 }

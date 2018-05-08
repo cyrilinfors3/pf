@@ -12,7 +12,7 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="project.id" readonly />
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="project.id">
             <label class="form-control-label" jhiTranslate="pfApp.project.title" for="field_title">Title</label>
             <input type="text" class="form-control" name="title" id="field_title"
                 [(ngModel)]="project.title" required/>
@@ -23,14 +23,14 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="project.id" >
             <label class="form-control-label" jhiTranslate="pfApp.project.creationdate" for="field_creationdate">Creationdate</label>
             <div class="input-group">
-                <input id="field_creationdate" type="text" class="form-control" name="creationdate" ngbDatepicker  #creationdateDp="ngbDatepicker" [(ngModel)]="project.creationdate"
-                required/>
-                <span class="input-group-btn">
+                <input id="field_creationdate" type="text" class="form-control" value="2018-04-13" name="creationdate" ngbDatepicker  #creationdateDp="ngbDatepicker" [(ngModel)]="project.creationdate"
+                 readonly />
+                 <span class="input-group-btn"  >
                     <button type="button" class="btn btn-secondary" (click)="creationdateDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
+                </span>  
             </div>
             <div [hidden]="!(editForm.controls.creationdate?.dirty && editForm.controls.creationdate?.invalid)">
                 <small class="form-text text-danger"
@@ -39,7 +39,7 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="project.id">
             <label class="form-control-label" jhiTranslate="pfApp.project.documentaion" for="field_documentaion">Documentaion</label>
             <div>
                 <div *ngIf="project.documentaion" class="form-text text-danger clearfix">
@@ -63,26 +63,41 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'" >
             <label class="form-control-label" jhiTranslate="pfApp.project.status" for="field_status">Status</label>
             <input type="text" class="form-control" name="status" id="field_status"
-                [(ngModel)]="project.status" />
+                [(ngModel)]="project.status" readonly />
         </div>
-        <div class="form-group">
+          
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
             <label class="form-control-label" jhiTranslate="pfApp.project.owner" for="field_owner">Owner</label>
             <input type="text" class="form-control" name="owner" id="field_owner"
-                [(ngModel)]="project.owner" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="pfApp.project.sponsor" for="field_sponsor">Sponsor</label>
-            <input type="text" class="form-control" name="sponsor" id="field_sponsor"
-                [(ngModel)]="project.sponsor" />
-        </div>
-        <div class="form-group">
+                [(ngModel)]="project.owner"  />
+        </div> 
+        <div class="form-group"  *jhiHasAnyAuthority="'ROLE_ADMIN'" >
             <label class="form-control-label" jhiTranslate="pfApp.project.coach" for="field_coach">Coach</label>
             <input type="text" class="form-control" name="coach" id="field_coach"
-                [(ngModel)]="project.coach" />
+                [(ngModel)]="project.coach"   />
         </div>
+          
+        
+        <!-- <div class="form-group"  *jhiHasAnyAuthority="'ROLE_ADMIN','ROLE_COACH'" [hidden]="!project.id">
+        
+            <label class="form-control-label" jhiTranslate="pfApp.project.sponsor" for="field_sponsor">Sponsor</label>
+            <input type="text" class="form-control" name="sponsor" id="field_sponsor" placeholder="enter login"
+                [(ngModel)]="project.sponsor"  />
+        </div> -->
+        <div class="form-group"  *jhiHasAnyAuthority="'ROLE_SPONSOR'" >
+        
+            <label class="form-control-label" jhiTranslate="pfApp.project.sponsor" for="field_sponsor">Sponsor</label>
+            
+            <select class="form-control" class="form-control" name="sponsor" id="field_sponsor" 
+                [(ngModel)]="project.sponsor" >
+                <option [ngValue]='l' selected="selected">{{l}}</option>
+            </select>
+        </div>
+        
+        
 
     </div>
     <div class="modal-footer">

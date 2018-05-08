@@ -7,23 +7,33 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!vote.id">
+       
+          <div class="form-group" [hidden]="!vote.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="vote.id" readonly />
+        
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="pfApp.vote.rang" for="field_rang">Rang</label>
-            <input type="number" class="form-control" name="rang" id="field_rang"
-                [(ngModel)]="vote.rang" />
+              <input type="number" class="form-control" name="rang" id="field_rang"
+                [(ngModel)]="vote.rang" readonly/>   
+              
         </div>
 
-        <div class="form-group">
+        <div class="form-group" >
             <label class="form-control-label" jhiTranslate="pfApp.vote.project" for="field_project">Project</label>
+            <div *jhiHasAnyAuthority="'ROLE_ADMIN','ROLE_COACH'">
             <select class="form-control" id="field_project" name="project" [(ngModel)]="vote.project" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="projectOption.id === vote.project?.id ? vote.project : projectOption" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.title}}</option>
             </select>
+            </div>
+             <div *jhiHasAnyAuthority="'ROLE_SPONSOR'">
+            <input type="number" class="form-control" name="project" id="field_rang"
+                [(ngModel)]="vote.project" readonly/> 
+            </div>
+           
         </div>
     </div>
     <div class="modal-footer">

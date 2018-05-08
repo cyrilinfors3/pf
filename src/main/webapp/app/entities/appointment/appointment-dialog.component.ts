@@ -11,6 +11,7 @@ import { AppointmentPopupService } from './appointment-popup.service';
 import { AppointmentService } from './appointment.service';
 import { Project, ProjectService } from '../project';
 import { ResponseWrapper } from '../../shared';
+import { Account, LoginModalService, Principal } from '../../shared';
 
 @Component({
     selector: 'jhi-appointment-dialog',
@@ -20,10 +21,12 @@ export class AppointmentDialogComponent implements OnInit {
 
     appointment: Appointment;
     isSaving: boolean;
-
+    account: Account;
+    l = '';
     projects: Project[];
 
     constructor(
+        private principal: Principal,
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private appointmentService: AppointmentService,
@@ -33,6 +36,10 @@ export class AppointmentDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.principal.identity().then((account) => {
+        this.account = account;
+        this.l = account.login;
+        });
         this.isSaving = false;
         this.projectService.query()
             .subscribe((res: ResponseWrapper) => { this.projects = res.json; }, (res: ResponseWrapper) => this.onError(res.json));

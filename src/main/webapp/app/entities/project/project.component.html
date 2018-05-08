@@ -1,6 +1,6 @@
 <div>
     <h2>
-        <span jhiTranslate="pfApp.project.home.title">Projects</span>
+        <span jhiTranslate="pfApp.project.home.title">Projects </span>{{l}}
         <button class="btn btn-primary float-right jh-create-entity create-project" [routerLink]="['/', { outlets: { popup: ['project-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down"  jhiTranslate="pfApp.project.home.createLabel">
@@ -25,6 +25,7 @@
         </div>
     </div>
     <br/>
+    <!--  
     <div class="table-responsive" *ngIf="projects">
         <table class="table table-striped">
             <thead>
@@ -61,6 +62,7 @@
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
+                        <div *jhiHasAnyAuthority="'ROLE_SPONSOR','ROLE_ADMIN'">
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
                                 replaceUrl="true"
@@ -68,19 +70,109 @@
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        </div>
+                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                          <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/delete'} }]"
                                 replaceUrl="true"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
+                        </div>
+                       
                     </div>
                 </td>
             </tr>
             </tbody>
         </table>
+    </div>-->
+    <div class="row">
+  <div class="col-md-3"  *ngFor="let project of projects ;trackBy: trackId">
+  <div *jhiHasAnyAuthority="'ROLE_PROJECTREP'">
+   <div  *ngIf="project?.owner == l">
+     <div class="panel panel-primary">
+      <div class="panel-heading">{{project.title}}</div>
+      <div class="panel-body">{{project.title}} created on {{project.creationdate}}<br>
+              coach:  {{project.coach}}
+               <br>
+               sponsor: {{project.sponsor}}
+               <br>
+             owner:  {{project.owner}}
+               <br>
+             status:  {{project.status}}  
+               </div>
+       <div class="btn-group flex-btn-group-container"> 
+                        <button type="submit"
+                                [routerLink]="['../project', project.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button> 
+                        
+                        <button type="submit" *jhiHasAnyAuthority="'ROLE_SPONSOR','ROLE_ADMIN'" [hidden]="project.sponsor"
+                                [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline"  >Sponsor</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button> 
+                    </div>
     </div>
+   </div>
+   
+  </div>
+   <div *jhiHasAnyAuthority="'ROLE_SUP'">
+   <div >
+     <div class="panel panel-primary">
+      <div class="panel-heading">{{project.title}}</div>
+      <div class="panel-body">{{project.title}} created on {{project.creationdate}}<br>
+              coach:  {{project.coach}}
+               <br>
+               sponsor: {{project.sponsor}}
+               <br>
+             owner:  {{project.owner}}
+               <br>
+             status:  {{project.status}}  
+               </div>
+       <div class="btn-group flex-btn-group-container"> 
+                        <button type="submit"
+                                [routerLink]="['../project', project.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button> 
+                        
+                        <button type="submit" *jhiHasAnyAuthority="'ROLE_SPONSOR','ROLE_ADMIN'" [hidden]="project.sponsor"
+                                [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline"  >Sponsor</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button> 
+                    </div>
+    </div>
+   </div>
+   
+  </div>
+    
+   
+  </div>
+</div>
         <div *ngIf="projects && projects.length">
             <div class="row justify-content-center">
                 <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>

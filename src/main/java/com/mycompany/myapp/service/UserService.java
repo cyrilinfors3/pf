@@ -114,16 +114,20 @@ public class UserService {
         User newUser = new User();
         String role=userDTO.getAuth();
         Authority authority=null;
-        authority = authorityRepository.findOne(AuthoritiesConstants.USER);
-//        if(role.equals("PROJECTREP")){
-//        	  authority = authorityRepository.findOne(AuthoritiesConstants.PROJECTREP);	
-//        	  
-//        }else if(role.equals("SPONSOR")){
-//        	  authority = authorityRepository.findOne(AuthoritiesConstants.SPONSOR);
-//        } else {
-//        	  authority = authorityRepository.findOne(AuthoritiesConstants.USER);
-//        } 
         Set<Authority> authorities = new HashSet<>();
+     //   authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+         if(role.equals("PROJECTREP")){
+         	  authority = authorityRepository.findOne(AuthoritiesConstants.PROJECTREP);	
+         	 authorities.add(authority);
+         }else if(role.equals("SPONSOR")){
+         	  authority = authorityRepository.findOne(AuthoritiesConstants.SPONSOR);
+         	 authorities.add(authority);
+         	authority = authorityRepository.findOne(AuthoritiesConstants.SUP);
+        	 authorities.add(authority);
+         } else {
+         	  authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+         } 
+        
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin());
         // new user gets initially a generated password
@@ -137,7 +141,7 @@ public class UserService {
         newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
-        authorities.add(authority);
+        
         authority = authorityRepository.findOne(AuthoritiesConstants.USER);
         authorities.add(authority);
         //authority = authorityRepository.findOne(AuthoritiesConstants.COACH);

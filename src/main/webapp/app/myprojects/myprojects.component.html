@@ -3,34 +3,47 @@
  <div class="row" >
    <div class="col-md-7">
    <div class="row">
-   <button class="btn btn-primary float-right jh-create-entity create-project" [routerLink]="['/', { outlets: { popup: ['project-new'] } }]">
+   
+      <div  *ngIf="data?.length < 1">
+      <div class="alert alert-warning" >
+                 <span >You don't have a project yet.</span>
+            </div>
+            <button class="btn btn-primary float-right jh-create-entity create-project" [routerLink]="['/', { outlets: { popup: ['project-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down"  jhiTranslate="pfApp.project.home.createLabel">
             Create new Project
             </span>
         </button>
+            
+      </div>
 	  <div class="col-md-12" *ngFor="let project of data ">
 	    <div class="panel panel-primary">
 	      <div class="panel-heading">{{project.title}}</div>
 	             
 	      <div class="panel-body">{{project.title}} created on {{project.creationdate}}<br>
-	      {{project.status}} <br>
-                 {{project.owner}}<br>
-                 {{project.sponsor}}<br>
-                 {{project.coach}}<br>
+	      status: {{project.status}} 
+	      <!-- <div  *ngIf="project?.owner != l">hello</div> --><br>  
+             coach:  {{project.coach}}
+               <br>
+               sponsor: {{project.sponsor}}
+               <br>
+             owner:  {{project.owner}}
+               <br>
+             status:  {{project.status}}</div>
                    <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../project', project.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
+                        </button> 
+                        
+                        <button type="submit" *jhiHasAnyAuthority="'ROLE_SPONSOR','ROLE_ADMIN'" [hidden]="project.sponsor"
                                 [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <span class="d-none d-md-inline"  >Sponsor</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/delete'} }]"
@@ -38,16 +51,9 @@
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+                        </button> 
                     </div>
-	      </div>
+	      
 	    </div>
 	  </div>
   </div>
@@ -67,17 +73,13 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-6 col-md-6">
-                          <a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-education"></span> <br> Project guid</a>
-                          <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-question-sign"></span> <br/>Help</a>
-                          <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-folder-close"></span><br/>{{data.length}} <br/>Project created</a>
-                          <a href="#/project" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-pencil"></span> <br/>My Projects</a>
+                       <div class="col-xs-6 col-md-6">
+                          <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-question-sign"></span> <br/>Help</a> 
+                          <a href="#/myprojects" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-pencil"></span> <br/>My Projects</a>
                         </div>
                         <div class="col-xs-6 col-md-6">
-                          <a href="#/settings" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Profile</a>
-                          <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Servidores</a>
-                          <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-picture"></span> <br/>Photos</a>
-                          <a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-off"></span> <br/>Sair</a>
+                          <a href="#/settings" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Profile</a> 
+                          <a href="#/appointments" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-suitcase"></span> <br/>Appointments</a>
                         </div>
                     </div>
                     

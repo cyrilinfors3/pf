@@ -1,6 +1,6 @@
 
 <div *ngIf="project">
-    <h2><span jhiTranslate="pfApp.project.detail.title">Project</span> {{project.id}}</h2>
+     <!--  <h2><span jhiTranslate="pfApp.project.detail.title">Project</span> {{project.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
@@ -43,16 +43,122 @@
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+   <button type="submit" *jhiHasAnyAuthority="'ROLE_SPONSOR','ROLE_ADMIN'" [hidden]="project.sponsor"
+                                [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline"  >Sponsor</span>
+                        </button>
     <button type="button" 
             class="btn btn-primary" (ngClick)="sendappointment()">
         <span class="fa fa-envelope"></span>&nbsp;<span  > Book an appointment</span>
+    </button>  -->
+    
+  <div class ="main-container" >
+
+<div class=" highlight" style="margin-left:0;">
+<a class="btn btn-primary" href="#/appointments" >
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.appointment">Appointment</span>
+                        </a>
+<a class="btn btn-primary" href="#/projectevolution;search={{project.title}};page=0;sort=title,asc" >
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.projectevolution">Projectevolution</span>
+                        </a>
+<button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'vote/'+ 1 + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" >Vote project</span>
+                        </button>
+<h2><span jhiTranslate="pfApp.project.title">Title</span>: {{project.title}}</h2>
+	<div class="row">
+  <h2><span jhiTranslate="pfApp.project.detail.title">Project</span> id: {{project.id}}</h2>
+		
+        <img src ="http://davidnaylor.org/temp/thunderbird-logo-200x200.png" /> 
+        <ul>
+            <li><span jhiTranslate="pfApp.project.creationdate">Creationdate</span>: {{project.creationdate | date:'mediumDate'}}</li>
+            <li><span jhiTranslate="pfApp.project.status">Status</span>:  {{project.status}}</li>
+            <li><span jhiTranslate="pfApp.project.owner">Owner</span><span>: {{project.owner}}</span></li>
+           
+        </ul>
+        </div>
+        <div class="row">
+        <p>Morbi laoreet ipsum sem, eu condimentum ante efficitur vel.
+        Donec at nibh risus. Nam mollis nulla eget scelerisque facilisis. 
+        Suspendisse sit amet condimentum dolor. Vestibulum euismod congue mi
+        pulvinar dignissim. </p>
+        <div *ngIf="project.documentaion">
+                <a (click)="openFile(project.documentaionContentType, project.documentaion)" class="btn btn-primary" jhiTranslate="entity.action.open">open Document</a>
+                {{project.documentaionContentType}}, {{byteSize(project.documentaion)}}
+            </div> 
+       <button type="submit"
+            (click)="previousState()"
+            class="btn btn-warning">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
-    
-    
+          <button type="submit" *jhiHasAnyAuthority="'ROLE_SPONSOR','ROLE_ADMIN'" [hidden]="project.sponsor"
+                                [routerLink]="['/', { outlets: { popup: 'project/'+ project.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline"  >Sponsor</span>
+                        </button>
+          
+        </div>
+    </div>
+	</div>
 </div>
+</div>  
+</div>
+
+<style>
+.main-container{
+    
+background: #d53369; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #d53369 , #cbad6d); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #d53369 , #cbad6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
+    }
+.highlight  {
+    width: 600px;
+    color: white;
+    background: rgba(0, 0, 0, 0.26);
+    border-radius: 10px;
+    padding: 3%;
+    
+	}
+    
+.highlight img {
+    
+    float: left;
+    width: 100px;
+    height: 100px; 
+    margin: 10px;
+    }
+    
+.highlight ul {
+    list-style-image: url('http://icons.iconarchive.com/icons/yusuke-kamiyamane/fugue/16/tick-small-icon.png');
+    margin-left: 1%;
+    float: left; 
+    clear: right
+    }
+    
+.highlight button {
+   margin-left: 1%;
+    float: right;
+    }
+
+.highlight h1,h2,h3,h4,h5,h6 {
+    padding-bottom: 2%;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.41);
+    font-size:20px;
+    text-align : center;
+    text-transform: uppercase;
+    }
+    
+.highlight p {
+    text-align: justify;
+    }</style>
